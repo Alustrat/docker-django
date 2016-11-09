@@ -45,5 +45,12 @@ DATABASES = {
     }
 }
 ```
+```
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = '/static'
+MEDIA_ROOT = '/media'
+```
 
 And now you can access to django from your browser at *docker_container_IP:8000* !
