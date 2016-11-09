@@ -1,9 +1,15 @@
-FROM python:3
+FROM python:latest
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-RUN mkdir /code/www
+
+# Create working folders
+RUN mkdir /code \
+  /code/www
 WORKDIR /code
-RUN pip install virtualenv
-RUN virtualenv env
+
+# Install and create virtualenv
+RUN pip install virtualenv \
+  && virtualenv env
+
+# Install Django and other dependencies in the virtualenv
 ADD requirements.txt /code/env/
 RUN ["/bin/bash", "-c", "source /code/env/bin/activate && pip install --upgrade pip && pip install -r env/requirements.txt"]

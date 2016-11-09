@@ -1,21 +1,15 @@
-Starter nginx / django /postresql
+Starter nginx / django / postgresql
 ===================
 
+Docker project to have a starter for django projects. The project use 3 containers which all starts from an official container. There is the nginx container, the django container and finally the postgresql container.
 
-Starter to works on django projects on docker containers. Run with or without nginx and rely with a postgresql database. Of course with a virtualenvironment too !
+This project is still in work so i don't recommend to use it now.
 
-----------
-
-
-In works !
+Django container configuration
 -------------
 
-Hi, at this time, this project is still in work. There is just the django container which i work on. Next step is to relate with nginx and after that with postgresql. 
+All the code is available in the /code directory, and look like this :
 
-Django : How it's look ?
--------------
-
-Istart from the basic last python container but maybe latter I will use the alpine version. We create the /code container wich will contain our django app and our environment. The arborescence look like this :
 ```
 code
  |---->env
@@ -27,12 +21,11 @@ code
        `----->myapp
 ```
 
-But how to start it ?
+Download and use
 -------------
 
-It's easy man ! After cloned it, you just have to write 3 commands :
+After cloned it, you just have to write these 2 commands :
 ```
-docker-compose build --no-cache
 docker-compose run -d web /bin/bash -c "source /code/env/bin/activate; django-admin startproject mysite ./www"
 docker-compose up
 ```
@@ -53,9 +46,4 @@ DATABASES = {
 }
 ```
 
-And all is good in a the better of the world.
-
-
-WTF this english ?
--------------
-If you see all of this. I just created that project and it's late, so i made this markdown really fast. This will be corrected tomorrow.
+And now you can access to django from your browser at *docker_container_IP:8000* !
