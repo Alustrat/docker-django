@@ -45,5 +45,14 @@ DATABASES = {
     }
 }
 ```
+```
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
-And now you can access to django from your browser at *docker_container_IP:8000* !
+STATIC_ROOT = '/static'
+MEDIA_ROOT = '/media'
+```
+
+By default, it's lauch as 'dev' mode, with no link between nginx and your django project. The site is only launched by 'python manage.py runserver' at port 8000. The goal of this is to directly have changes visible.
+
+If you want to put it in production mode, comment docker-compose.yml line 9 and uncomment line 10. This will start uwsgi to communicate with nginx. Your site will be available at port 80.

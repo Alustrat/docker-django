@@ -1,13 +1,27 @@
 version: '2'
 services:
+
   db:
     image: postgres
+  
   web:
     build: .
     command: ["/bin/bash", "-c", "source /code/env/bin/activate && python ./www/manage.py runserver 0.0.0.0:8000"]
+#    command: ["/bin/bash", "-c", "source /code/env/bin/activate && python ./www/manage.py collectstatic --noinput && /code/env/bin/uwsgi --socket :5000 --wsgi-file /code/www/mysite/wsgi.py --master --processes 4 --threads 2 --chdir /code/www"]
     volumes:
       - ./django:/code/www
     ports:
       - "8000:8000"
     depends_on:
       - db
+  
+  nginx:
+    build: ./nginx 
+    links:
+      - web
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+    volumes_from:
+      - web
+    ports:
+      - "80:80"
